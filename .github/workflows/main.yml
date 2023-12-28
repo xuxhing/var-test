@@ -5,24 +5,30 @@ on:
     inputs:
       environment:
         description: 'Environment to run tests against'
-        type: string
+        type: choice
         required: true
+        options:
+          - prod
+          - dev
       tags:
         description: 'Environment to run tests against'
         type: string
         required: true
+      perform_deploy:
+        required: true
+        type: boolean
   push:
     branches:
       - main
   
-
 env:
   PORT: ${{vars.PORT}}
 
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${{inputs.environment == 'prod' && 'prod' || 'dev'}}
+    if: ${{ inputs.perform_deploy }}
+    environment: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v4.1.1
       - run: |
@@ -30,3 +36,5 @@ jobs:
           echo ${PORT}
           echo ${{inputs.tags}}
           cat .env
+          
+      
