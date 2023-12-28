@@ -22,10 +22,11 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${{inputs.environment == 'prod' && prod || dev}}
+    environment: ${{inputs.environment == 'prod' && 'prod' || 'dev'}}
     steps:
       - uses: actions/checkout@v4.1.1
       - run: |
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
+          echo ${inputs.tags}
           cat .env
