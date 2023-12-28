@@ -25,13 +25,13 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${{ PRODUCTION && 'prod' || 'dev' }}
+    environment: ${ PRODUCTION && 'prod' || 'dev' }
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
       - name: Run script
-        if: ${{ PRODUCTION == false }}
+        if: ${ PRODUCTION == false }
         run: |
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
@@ -39,7 +39,7 @@ jobs:
           echo ${{PRODUCTION && 'true' || 'false'}}
           cat .env
       - name: Build script
-        if: ${{ PRODUCTION == true }}
+        if: ${ PRODUCTION == true }
         run: |
           echo ${{ inputs.environment }}
           echo ${{inputs.tags}}
