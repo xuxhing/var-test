@@ -14,37 +14,37 @@ on:
         description: '发布版本tag'
         type: string
         required: true
-      perform_deploy:
-        required: true
-        type: boolean
   push:
     branches:
       - main
   
 env:
   PORT: ${{vars.PORT}}
+  PRODUCTION: ${{ inputs.environment == 'prod' && true || false }}
 
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.perform_deploy && 'prod' || 'dev' }}
+    environment: ${{ PRODUCTION && 'prod' || 'dev' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
       - name: Run script
-        if: ${{ inputs.perform_deploy == false }}
+        if: ${{ PRODUCTION == false }}
         run: |
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
           echo ${{inputs.tags}}
-          echo ${{inputs.perform_deploy && 'true' || 'false'}}
+          echo ${{PRODUCTION && 'true' || 'false'}}
           cat .env
       - name: Build script
-        if: ${{ inputs.perform_deploy }}
+        if: ${{ PRODUCTION == true }}
         run: |
           echo ${{ inputs.environment }}
           echo ${{inputs.tags}}
+          echo ${{PRODUCTION && 'true' || 'false'}}
+          
            
       
           
