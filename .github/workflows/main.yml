@@ -1,9 +1,20 @@
 name: Deployment
 
 on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: string
+        required: false
+      tags:
+        description: 'Environment to run tests against'
+        type: string
+        required: true
   push:
     branches:
       - main
+  
 
 env:
   PORT: ${{vars.PORT}}
@@ -11,6 +22,7 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
+    environment: ${{inputs.environment == 'prod' && prod || dev}}
     steps:
       - uses: actions/checkout@v4.1.1
       - run: |
