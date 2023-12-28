@@ -1,6 +1,9 @@
 name: Deployment
 
 on:
+  release:
+    types: [published]
+    
   workflow_dispatch:
     inputs:
       environment:
@@ -14,10 +17,7 @@ on:
         description: '发布版本tag'
         type: string
         required: true
-  push:
-    branches:
-      - main
-  
+ 
 env:
   PORT: ${{vars.PORT}}
 
