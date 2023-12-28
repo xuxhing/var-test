@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment to run tests against'
+        description: '发布的环境'
         type: choice
         required: true
         options:
           - prod
           - dev
       tags:
-        description: 'Environment to run tests against'
+        description: '发布版本tag'
         type: string
         required: true
       perform_deploy:
@@ -27,14 +27,26 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    if: ${{ inputs.perform_deploy }}
     environment: ${{ inputs.environment }}
     steps:
-      - uses: actions/checkout@v4.1.1
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Run script
+        run: |
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
           echo ${{inputs.tags}}
           cat .env
+      - name: Run script
+        if: ${{ inputs.perform_deploy }}
+        run: |
+          echo ${{ inputs.environment }}
+          echo ${{inputs.tags}}
+           
+      
+          
+        
+      
           
       
