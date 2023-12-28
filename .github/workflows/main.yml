@@ -27,7 +27,7 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.perform_deploy && 'prod' || 'dev' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -37,8 +37,9 @@ jobs:
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
           echo ${{inputs.tags}}
+          echo ${{inputs.perform_deploy && 'true' || 'false'}}
           cat .env
-      - name: Run script
+      - name: Build script
         if: ${{ inputs.perform_deploy }}
         run: |
           echo ${{ inputs.environment }}
