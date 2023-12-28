@@ -35,7 +35,6 @@ jobs:
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
           echo ${{inputs.tags}}
-          echo ${{PRODUCTION && 'true' || 'false'}}
           cat .env
       - name: Build script
         if: ${ inputs.environment == 'prod' }
