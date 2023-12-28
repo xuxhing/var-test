@@ -6,7 +6,7 @@ on:
       environment:
         description: 'Environment to run tests against'
         type: string
-        required: false
+        required: true
       tags:
         description: 'Environment to run tests against'
         type: string
@@ -28,5 +28,5 @@ jobs:
       - run: |
           echo "PORT=${{vars.PORT}}" >> .env
           echo ${PORT}
-          echo ${inputs.tags}
+          echo ${{inputs.tags}}
           cat .env
