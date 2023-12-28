@@ -24,7 +24,7 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${ inputs.environment == 'prod' && 'prod' || 'dev' }
+    environment: ${{ inputs.environment == 'prod' && 'prod' || 'dev' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -37,7 +37,7 @@ jobs:
           echo ${{inputs.tags}}
           cat .env
       - name: Build script
-        if: ${ inputs.environment == 'prod' }
+        if: ${{ inputs.environment == 'prod' }}
         run: |
           echo ${{ inputs.environment }}
           echo ${{inputs.tags}}
