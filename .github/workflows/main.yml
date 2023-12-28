@@ -29,12 +29,9 @@ jobs:
        - name: Executing remote ssh commands
          uses: appleboy/ssh-action@master
          with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.KEY }}
-          proxy_host: ${{ secrets.PROXY_HOST }}
-          proxy_username: ${{ secrets.PROXY_USERNAME }}
-          proxy_password: ${{ secrets.PROXY_KEY }}
+          host: ${{ secrets.PROXY_HOST }}
+          username: ${{ secrets.PROXY_USERNAME }}
+          password: ${{ secrets.PROXY_KEY }}
           script: |
             whoami
             ls -al
