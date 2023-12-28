@@ -24,7 +24,7 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment == 'prod' && 'prod' || 'dev' }}
+    environment: dev
     steps:
        - name: Executing remote ssh commands
          uses: appleboy/ssh-action@master
