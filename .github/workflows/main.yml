@@ -37,7 +37,7 @@ jobs:
           host: ${{secrets.PROXY_HOST}}
           username: ${{secrets.PROXY_USERNAME}}
           password: ${{secrets.PROXY_KEY}}
-          source: "test/.env,test/.env"
+          source: "test/.env"
           target: ~/
           
       - name: Executing remote ssh commands
