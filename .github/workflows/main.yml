@@ -26,21 +26,18 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment == 'prod' && 'prod' || 'dev' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-
-      - name: Run script
-        if: ${{ inputs.environment == 'dev' || !inputs.environment }}
-        run: |
-          echo "PORT=${{vars.PORT}}" >> .env
-          echo ${PORT}
-          echo ${{inputs.tags}}
-          cat .env
-      - name: Build script
-        if: ${{ inputs.environment == 'prod' }}
-        run: |
-          echo ${{ inputs.environment }}
-          echo ${{inputs.tags}}
+       - name: Executing remote ssh commands
+         uses: appleboy/ssh-action@master
+         with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          proxy_host: ${{ secrets.PROXY_HOST }}
+          proxy_username: ${{ secrets.PROXY_USERNAME }}
+          proxy_key: ${{ secrets.PROXY_KEY }}
+          script: |
+            whoami
+            ls -al
           
            
       
