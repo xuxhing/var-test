@@ -21,6 +21,10 @@ jobs:
         path: data-directory
         key: data-${{ github.run_id }}
 
+    - name: Env
+      env:
+        data: ${{toJSON(github.event)}}
+
 # jobs:
 #   build:
 #     runs-on: ubuntu-latest
