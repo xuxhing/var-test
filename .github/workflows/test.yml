@@ -17,3 +17,4 @@ jobs:
           workflow: Downstream Workflow
           repo: ${{ github.repository }}
           inputs: '{ "message": "blah blah", "something": false }'
+          token: ${{secrets.TOKEN}}
