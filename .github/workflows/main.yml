@@ -1,16 +1,6 @@
 name: 12 - Run Workflow
 
 on:
-  workflow_call:
-    inputs:
-      output1:
-        description: 'A username passed from the caller workflow'
-        required: true
-        type: string
-      output2:
-        description: 'A username passed from the caller workflow'
-        required: true
-        type: string
   workflow_run:
     workflows: ["12 - Workflow Tester"]
     types: [completed]
