@@ -23,9 +23,13 @@ jobs:
         path: data-directory
         key: data-${{ github.event.workflow_run.id }}
 
-    - name: Use cached data
+    - name: Read cached data
       run: |
-        cat data-directory/data.txt
+        cat data-directory/data.txt >> $GITHUB_ENV
+
+    - name: Print data
+      run: |
+        echo $GITHB_ENV
 
 # jobs:
 #   use-data:
