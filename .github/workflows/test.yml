@@ -24,6 +24,8 @@ jobs:
     - name: Env
       env:
         data: ${{toJSON(github.event)}}
+      run: |
+        echo ${env.data}
 
 # jobs:
 #   build:
