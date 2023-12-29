@@ -27,6 +27,7 @@ on:
 #         type: string
 env:
   ENV: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.env || 'dev' }}
+  EVENT: ${{ toJSON(github.event) }}
 jobs:
   retrieve-and-use-cache:
     runs-on: ubuntu-latest
