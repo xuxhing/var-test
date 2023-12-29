@@ -38,6 +38,6 @@ jobs:
           WORKFLOW_CONTEXT: ${{ toJSON(github.event.workflow_run) }}
         run: |
           echo 
-          echo ${{$GITHUB_OUTPUT}}
+          echo ${{jobs.example_job.outputs.output1}}
           echo ${{inputs.output2}}
           
