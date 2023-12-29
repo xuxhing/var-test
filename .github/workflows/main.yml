@@ -29,13 +29,10 @@ jobs:
       - run: |
           echo "First workflow was a failure"
 
-  test:
+  second-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Show workflow_run
-        env:
-          WORKFLOW_CONTEXT: ${{ toJSON(github.event.workflow_run) }}
-        run: |
-          echo 
-          echo ${{ github.event.client_payload }}
+      # 执行第二个工作流的任务
+      - name: Print Parameter
+        run: echo "Result: ${{ github.event.workflow_run.outputs.result }}"
           
