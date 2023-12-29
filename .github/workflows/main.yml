@@ -28,6 +28,8 @@ jobs:
         cat data-directory/data.txt >> $GITHUB_ENV
 
     - name: Print data
+      env:
+        data: ${{ toJSON(github.event) }}
       run: |
         echo $GITHB_ENV
 
