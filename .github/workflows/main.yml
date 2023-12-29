@@ -25,11 +25,13 @@ on:
 #         type: string
 #       something:
 #         type: string
+env:
+  ENV: ${‎{ github.event_name == 'workflow_dispatch' && prod || dev }}
 
 jobs:
   retrieve-and-use-cache:
     runs-on: ubuntu-latest
-    environment: "${‎{ github.event_name == 'workflow_dispatch' && prod || dev }}"
+    environment: ${env.ENV}
     steps:
       - name: Assign var
         run: |
