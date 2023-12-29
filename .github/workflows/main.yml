@@ -9,11 +9,25 @@ on:
         type: string
 
 jobs:
-  use-data:
+  retrieve-and-use-cache:
     runs-on: ubuntu-latest
     steps:
-      - name: Retrieve cache
-        run: |
-          echo ${{inputs.message}}
-          echo ${{inputs.something}}
+    - name: Retrieve cache
+      uses: actions/cache@v3
+      with:
+        path: data-directory
+        key: data-${{ github.event.workflow_run.id }}
+
+    - name: Use cached data
+      run: |
+        cat data-directory/data.txt
+
+# jobs:
+#   use-data:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Retrieve cache
+#         run: |
+#           echo ${{inputs.message}}
+#           echo ${{inputs.something}}
         
