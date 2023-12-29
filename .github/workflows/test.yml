@@ -12,6 +12,11 @@ jobs:
     steps:
       # 执行第一个工作流的任务
 
-      - name: Set Output
-        id: output
-        run: echo "value=hello" >> $GITHUB_OUTPUT
+      - name: Trigger Second Workflow
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: second-workflow
+          param1: "aaa"
+          param2: "bbb"
