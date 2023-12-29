@@ -14,7 +14,7 @@ jobs:
     - name: Generate data
       run: |
         mkdir -p data-directory
-        echo "data to share" > data-directory/data.txt
+        echo "PORT=8000" > data-directory/data.txt
 
     - name: Cache data
       uses: actions/cache@v3
