@@ -31,7 +31,7 @@ env:
 jobs:
   retrieve-and-use-cache:
     runs-on: ubuntu-latest
-    environment: ${env.ENV}
+    environment: ${{env.ENV}}
     steps:
       - name: Assign var
         run: |
