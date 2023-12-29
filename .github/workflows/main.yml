@@ -1,6 +1,16 @@
 name: 12 - Run Workflow
 
 on:
+  workflow_call:
+    inputs:
+      output1:
+        description: 'A username passed from the caller workflow'
+        required: true
+        type: string
+      output2:
+        description: 'A username passed from the caller workflow'
+        required: true
+        type: string
   workflow_run:
     workflows: ["12 - Workflow Tester"]
     types: [completed]
@@ -27,5 +37,7 @@ jobs:
         env:
           WORKFLOW_CONTEXT: ${{ toJSON(github.event.workflow_run) }}
         run: |
-          echo ${{ github.event.workflow_run }}
-          echo $WORKFLOW_CONTEXT
+          echo 
+          echo ${{inputs.output1}}
+          echo ${{inputs.output2}}
+          
