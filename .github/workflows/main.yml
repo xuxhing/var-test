@@ -27,16 +27,12 @@ on:
 #         type: string
 env:
   ENV: ${{ github.event_name == 'workflow_dispatch' && 'prod' || 'dev' }}
-
+  TAG: ${{ github.event.inputs.tag }}
 jobs:
   retrieve-and-use-cache:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-      - name: Assign
-        run: |
-          echo "TAG_NAME=${‎{ github.event.inputs.version }‎}" >> $GITHUB_ENV
-          
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
