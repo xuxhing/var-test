@@ -8,14 +8,29 @@ on:
 permissions: read-all
 
 jobs:
-  build:
+  build-and-cache-data:
     runs-on: ubuntu-latest
-    environment: dev
     steps:
-      - name: Invoke workflow in another repo with inputs
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Downstream Workflow
-          repo: ${{ github.repository }}
-          inputs: '{ "message": "blah blah", "something": false }'
-          token: ${{secrets.TOKEN}}
+    - name: Generate data
+      run: |
+        mkdir -p data-directory
+        echo "data to share" > data-directory/data.txt
+
+    - name: Cache data
+      uses: actions/cache@v3
+      with:
+        path: data-directory
+        key: data-${{ github.run_id }}
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     environment: dev
+#     steps:
+#       - name: Invoke workflow in another repo with inputs
+#         uses: benc-uk/workflow-dispatch@v1
+#         with:
+#           workflow: Downstream Workflow
+#           repo: ${{ github.repository }}
+#           inputs: '{ "message": "blah blah", "something": false }'
+#           token: ${{secrets.TOKEN}}
