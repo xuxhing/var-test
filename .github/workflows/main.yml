@@ -2,10 +2,22 @@ name: Downstream Workflow
 
 on:
   workflow_run:
-    workflows: ["First Workflow"]
-    types:
-      - completed
+    workflows: [First Workflow]
+    types: [completed]
+
   workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment'
+        type: choice
+        required: true
+        options:
+          - prod
+          - dev
+      tag:
+        description: 'Release tag'
+        type: string
+        required: true
 # on:
 #   workflow_dispatch:
 #     inputs:
@@ -14,23 +26,32 @@ on:
 #       something:
 #         type: string
 
-env:
-  workflow: ${{ toJSON(github.event.workflow_run) }}
-  eventname: ${{ github.event_name }}
-
 jobs:
   retrieve-and-use-cache:
     runs-on: ubuntu-latest
+    environment: ${‎{ github.event_name == "workflow_dispatch" && inputs.env || "dev" }}
     steps:
-    - name: Retrieve cache
-      uses: actions/cache@v3
-      with:
-        path: data-directory
-        key: data-${{ github.event.workflow_run.id }}
-
-    - name: Read cached data
-      run: |
-        cat data-directory/data.txt >> $GITHUB_ENV
+      - name: Assign var
+        run: |
+          echo "TAG=latest" >> $GITHUB_ENV
+          if [ "${‎{ github.event_name }‎}" = "workflow_run" ]; then
+            echo "TAG=${‎{ github.event.head_branch }‎}" >> $GITHUB_ENV
+          fi;
+          if [ "${‎{ github.event_name }‎}" = "workflow_dispatch" ]; then
+            echo "TAG=${‎{ inputs.tag }‎}" >> $GITHUB_ENV
+          fi;
+          
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://b2f9-124-233-1-146.ngrok-free.app/deploy'
+          method: 'POST'
+          username: "admin"
+          password: "admin"
+          customHeaders: '{"Content-Type": "multipart/form-data"}'
+          data: '{"tag": "${{ github.repository }}/${{env.TAG}}"}'
+          file: "./.env"
+    
 
 # jobs:
 #   use-data:
