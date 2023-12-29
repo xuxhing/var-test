@@ -18,5 +18,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           event-type: second-workflow
-          param1: "aaa"
-          param2: "bbb"
+          client-payload: "{a: 'aaa', b: '111'}"
