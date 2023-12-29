@@ -42,7 +42,8 @@ jobs:
           password: "admin"
           customHeaders: '{"Content-Type": "multipart/form-data"}'
           data: '{"tag": "${{ github.repository }}/${{env.TAG}}"}'
-          file: "./.env"
+          files: '{"file": "./.env"}'
+          
     
 
 # jobs:
