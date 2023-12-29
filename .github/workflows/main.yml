@@ -16,7 +16,7 @@ on:
     types: [completed]
 
 env:
-  output1:  ${{github.event}}
+  output1:  ${{ toJSON(github.event) }}
 
 jobs:
   on-success:
