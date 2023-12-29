@@ -18,4 +18,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           event-type: second-workflow
-          client-payload: "{a: 'aaa', b: '111'}"
+          client-payload: '{"mydata": "${{ steps.job1.outputs.mydata }}" }'
