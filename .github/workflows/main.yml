@@ -15,9 +15,6 @@ on:
     workflows: ["12 - Workflow Tester"]
     types: [completed]
 
-env:
-  output1:  ${{ toJSON(github.event) }}
-
 jobs:
   on-success:
     runs-on: ubuntu-latest
@@ -40,6 +37,5 @@ jobs:
           WORKFLOW_CONTEXT: ${{ toJSON(github.event.workflow_run) }}
         run: |
           echo 
-          echo ${env.outpu1}
-          echo ${{inputs.output2}}
+          echo ${{ github.event.client_payload }}
           
