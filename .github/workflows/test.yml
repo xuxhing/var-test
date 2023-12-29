@@ -1,4 +1,4 @@
-name: 12 - Workflow Tester
+name: First Workflow
 
 on:
   push:
