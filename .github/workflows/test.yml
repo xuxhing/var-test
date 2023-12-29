@@ -12,6 +12,6 @@ jobs:
       - name: Invoke workflow in another repo with inputs
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: main.yaml
+          workflow: Downstream Workflow
           repo: ${{ github.repository }}
           inputs: '{ "message": "blah blah", "something": false }'
