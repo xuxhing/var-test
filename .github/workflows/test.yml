@@ -1,9 +1,8 @@
 name: First Workflow
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 permissions: read-all
 
