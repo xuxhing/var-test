@@ -35,12 +35,7 @@ jobs:
     steps:
       - name: Assign
         run: |
-          if [ "${‎{ github.event_name }‎}" = "workflow_run" ]; then
-            echo "TAG=${‎{ github.event.head_branch }‎}" >> $GITHUB_ENV
-          fi;
-          if [ "${‎{ github.event_name }‎}" = "workflow_dispatch" ]; then
-            echo "TAG=${‎{ inputs.tag }‎}" >> $GITHUB_ENV
-          fi;
+          echo "TAG_NAME=${‎{ github.event.inputs.version }‎}" >> $GITHUB_ENV
           
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
