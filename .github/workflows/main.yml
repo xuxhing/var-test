@@ -16,7 +16,7 @@ on:
     types: [completed]
 
 env:
-  output1:  ${{jobs.example_job.outputs.output1}}
+  output1:  ${{github.event}}
 
 jobs:
   on-success:
