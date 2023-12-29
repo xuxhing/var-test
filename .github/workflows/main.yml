@@ -5,6 +5,7 @@ on:
     workflows: ["First Workflow"]
     types:
       - completed
+  workflow_dispatch:
 # on:
 #   workflow_dispatch:
 #     inputs:
@@ -15,6 +16,7 @@ on:
 
 env:
   workflow: ${{ toJSON(github.event.workflow_run) }}
+  eventname: ${{ github.event_name }}
 
 jobs:
   retrieve-and-use-cache:
