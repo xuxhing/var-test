@@ -14,4 +14,4 @@ jobs:
 
       - name: Set Output
         id: output
-        run: echo "::set-output name=result::success"
+        run: echo "value=hello" >> $GITHUB_OUTPUT
