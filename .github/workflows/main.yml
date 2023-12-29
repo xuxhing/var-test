@@ -1,18 +1,19 @@
 name: Downstream Workflow
 
 on:
-  workflow_run:
-    workflows: ["Upstream Workflow"]
-    types:
-      - completed
+  workflow_dispatch:
+    inputs:
+      message:
+        type: string
+      something:
+        type: string
 
 jobs:
   use-data:
     runs-on: ubuntu-latest
     steps:
       - name: Retrieve cache
-        uses: actions/cache@v3
-        with:
-          path: path/to/data
-          key: data-${{ github.event.workflow_run.id }}
+        run: |
+          echo ${{inputs.message}}
+          echo ${{inputs.something}}
         
