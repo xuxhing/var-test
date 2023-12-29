@@ -1,6 +1,14 @@
 name: 12 - Workflow Tester
 
 on:
+  workflow_call:
+    outputs:
+      output1:
+        description: "The first job output"
+        value: ${{ jobs.test.outputs.output1 }}
+      output2:
+        description: "The first job output"
+        value: ${{ jobs.test.outputs.output2 }}
   push:
 
 jobs:
