@@ -1,28 +1,23 @@
-name: 12 - Run Workflow
+name: Second Workflow
 
 on:
-  workflow_run:
-    workflows: ["12 - Workflow Tester"]
-    types: [completed]
+  workflow_dispatch:
+    inputs:
+      param1:
+        description: 'Parameter 1'
+        required: true
+      param2:
+        description: 'Parameter 2'
+        required: false
 
 jobs:
-  on-success:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-      - run: echo "First workflow was a success"
-
-  on-failure:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: |
-          echo "First workflow was a failure"
-
   second-job:
     runs-on: ubuntu-latest
+
     steps:
       # 执行第二个工作流的任务
-      - name: Print Parameter
-        run: echo "Result: ${{ github.event.workflow_run.outputs.value }}"
-          
+      - name: Print Parameters
+        run: |
+          echo ${{ inputs.param1 }}
+          echo ${{ inputs.param2 }}
+        
