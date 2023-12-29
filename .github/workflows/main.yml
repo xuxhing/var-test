@@ -1,12 +1,17 @@
 name: Downstream Workflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      message:
-        type: string
-      something:
-        type: string
+  workflow_run:
+    workflows: ["First Workflow"]
+    types:
+      - completed
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       message:
+#         type: string
+#       something:
+#         type: string
 
 jobs:
   retrieve-and-use-cache:
