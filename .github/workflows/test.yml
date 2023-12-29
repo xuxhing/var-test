@@ -9,8 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Cache data
-        uses: actions/cache@v3
+      - name: Invoke workflow in another repo with inputs
+        uses: benc-uk/workflow-dispatch@v1
         with:
-          path: path/to/data
-          key: data-${{ github.run_id }}
+          workflow: main.yaml
+          repo: ${{ github.repository }}
+          inputs: '{ "message": "blah blah", "something": false }'
