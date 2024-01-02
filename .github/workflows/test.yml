@@ -27,7 +27,7 @@ jobs:
 
     - id: set_output
       run: |
-        echo "value=123" >> $GITHUB_OUTPUT
+        echo "value=${env.TAG}" >> $GITHUB_OUTPUT
         
     - name: Use GitHub Context
       run: |
