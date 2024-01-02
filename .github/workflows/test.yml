@@ -18,12 +18,11 @@ jobs:
       run: |
         mkdir -p data-directory
         echo "PORT=8000" > data-directory/data.txt
-
-    - name: Cache data
-      uses: actions/cache@v3
-      with:
-        path: data-directory
-        key: data-${{ github.run_id }}
+        
+    - name: Use GitHub Context
+      run: echo "The branch name is ${GITHUB_REF#refs/heads/}"
+      env:
+        GITHUB_REF: ${{ github.ref }}
 
 # jobs:
 #   build:
