@@ -49,16 +49,16 @@ jobs:
           echo "timestamp=${timestamp}" >> $GITHUB_ENV
           md5_value=$(echo -n "your string here${timestamp}" | md5sum | awk '{print $1}')
           echo "sign=${md5_value}" >> $GITHUB_ENV
-      - name: Deploy Stage
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://b2f9-124-233-1-146.ngrok-free.app/deploy'
-          method: 'POST'
-          username: "admin"
-          password: "admin"
-          customHeaders: '{"Content-Type": "multipart/form-data"}'
-          data: '{"tag": "${{ github.repository }}/${{env.TAG}}"}'
-          files: '{"file": ".env"}'
+      # - name: Deploy Stage
+      #   uses: fjogeleit/http-request-action@v1
+      #   with:
+      #     url: 'https://b2f9-124-233-1-146.ngrok-free.app/deploy'
+      #     method: 'POST'
+      #     username: "admin"
+      #     password: "admin"
+      #     customHeaders: '{"Content-Type": "multipart/form-data"}'
+      #     data: '{"tag": "${{ github.repository }}/${{env.TAG}}"}'
+      #     files: '{"file": ".env"}'
           
     
 
