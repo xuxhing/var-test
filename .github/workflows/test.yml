@@ -39,6 +39,7 @@ jobs:
   use_setup:
     runs-on: ubuntu-latest
     needs: setup
+    env: ${{ needs.setup.outputs.tag }}
     steps:
       - name: Out value
         run: |
