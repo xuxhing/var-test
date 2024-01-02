@@ -5,7 +5,8 @@ on:
 
 permissions: read-all
 
-EVENT: ${{ toJSON(github.event) }}
+env:
+  EVENT: ${{ toJSON(github.event) }}
 
 jobs:
   build-and-cache-data:
