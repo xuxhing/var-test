@@ -5,6 +5,8 @@ on:
 
 permissions: read-all
 
+EVENT: ${{ toJSON(github.event) }}
+
 jobs:
   build-and-cache-data:
     runs-on: ubuntu-latest
