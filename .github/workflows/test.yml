@@ -21,7 +21,7 @@ jobs:
 
     - name: Set tag
       run: |
-        echo "TAG=${GITHUB_REF#refs/heads/}-${GITHUB_RUN_NUMBER}" >> GITHUB_ENV
+        echo "TAG=${GITHUB_REF#refs/heads/}-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
         
     - name: Use GitHub Context
       run: |
