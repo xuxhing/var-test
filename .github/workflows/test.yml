@@ -18,9 +18,15 @@ jobs:
       run: |
         mkdir -p data-directory
         echo "PORT=8000" > data-directory/data.txt
+
+    - name: Set tag
+      run: |
+        echo "TAG=${GITHUB_REF#refs/heads/}-${GITHUB_RUN_NUMBER}" >> GITHUB_ENV
         
     - name: Use GitHub Context
-      run: echo "The branch name is ${GITHUB_REF#refs/heads/}"
+      run: |
+        echo "The branch name is ${GITHUB_REF#refs/heads/}"
+        echo "${{env.TAG}}"
       env:
         GITHUB_REF: ${{ github.ref }}
 
