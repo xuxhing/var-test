@@ -26,7 +26,7 @@ jobs:
     - name: Use GitHub Context
       run: |
         echo "The branch name is ${GITHUB_REF#refs/heads/}"
-        echo ${env.TAG}
+        echo ${{env.TAG}}
       env:
         GITHUB_REF: ${{ github.ref }}
 
